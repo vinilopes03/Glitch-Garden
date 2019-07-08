@@ -9,7 +9,9 @@ public class DefenderSpawner : MonoBehaviour
     // Start is called before the first frame update
     private void OnMouseDown()
     {
-        SpawnDefenders();
+        if( defender != null) { 
+        AttemptToPlaceDefender();
+            }
     }
 
     public void setSelectDefender(Defender defenderSelect)
@@ -41,5 +43,17 @@ public class DefenderSpawner : MonoBehaviour
             Defender newDefender = Instantiate(defender, GetSquareClick(), Quaternion.identity) as Defender;
         }
         
+    }
+
+    private void AttemptToPlaceDefender()
+    {
+        var starDisplay = FindObjectOfType<Stars>();
+        int defenderCost = defender.getStarCost();
+
+        if (starDisplay.haveEnoughStars(defenderCost)){
+            SpawnDefenders();
+            starDisplay.spendStars(defenderCost);
+        }
+
     }
 }

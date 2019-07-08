@@ -19,6 +19,11 @@ public class Health : MonoBehaviour
         }
     }
 
+    public float getHealth()
+    {
+        return health;
+    }
+
     private void ExplosionVFX()
     {
         if (!particlesExplosion) { return; }
